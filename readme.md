@@ -33,6 +33,8 @@ The following aren't needed to run Tibia, but I like them anyway:
 - `rwho` (for easy ruptime monitoring)
 - `figlet` (for creating ssh banners)
 - `ripgrep` (fast search)
+- `shellcheck` (Bash linter because you never know)
+- `unrar` (ORTS2 map file is distributed as a rar file)
 
 Repositories
 ============
