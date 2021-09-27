@@ -1,0 +1,6 @@
+[submodule "forgottenserver"]
+	path = forgottenserver
+	url = https://github.com/silic0nalph4/forgottenserver
+[submodule "myaac"]
+	path = myaac
+	url = https://github.com/silic0nalph4/myaac
