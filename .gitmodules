@@ -1,9 +1,9 @@
 [submodule "forgottenserver"]
 	path = forgottenserver
-	url = https://github.com/silic0nalph4/forgottenserver
+	url = git@github.com:silic0nalph4/forgottenserver.git
 [submodule "myaac"]
 	path = myaac
-	url = https://github.com/silic0nalph4/myaac
+	url = git@github.com:silic0nalph4/myaac.git
 [submodule "orts2"]
 	path = orts2
 	url = https://github.com/silic0nalph4/orts2
