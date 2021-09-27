@@ -1,0 +1,64 @@
+version: "3.0"
+
+services:
+  # The Forgotten Server
+  server:
+    build:
+      context: forgottenserver
+    restart: always
+    ports:
+      - "7171:7171"
+      - "7172:7172"
+    depends_on:
+      - db
+    networks:
+      - db-network
+    volumes:
+      - ./orts2/data:/srv/data
+      - ./config.lua:/srv/config.lua
+
+  # MyAAC Account Website
+  web:
+    build:
+      context: myaac
+    restart: always
+    ports:
+      - 80:80
+    networks:
+      - db-network
+    depends_on:
+      - db
+    volumes:
+      - ./orts2/data:/srv/data
+      - ./config.lua:/srv/config.lua
+
+  # Maria DB
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: aibit
+      MYSQL_USER: forgottenserver
+      MYSQL_PASSWORD: aibit
+      # Automatically creates a database
+      MYSQL_DATABASE: forgottenserver
+    volumes:
+      # Mount & persist the database storage locally rather than inside the container
+      - ./db:/var/lib/mysql
+      # Create database schema on startup
+      - ./forgottenserver/schema.sql:/docker-entrypoint-initdb.d/forgottenserver_schema.sql
+      - ./myaac/install/includes/schema.sql:/docker-entrypoint-initdb.d/myaac_schema.sql
+    networks:
+      - db-network
+
+  # Database Admin tool
+  db-adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - db-network
+
+networks:
+  db-network:
