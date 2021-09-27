@@ -4,3 +4,6 @@
 [submodule "myaac"]
 	path = myaac
 	url = https://github.com/silic0nalph4/myaac
+[submodule "orts2"]
+	path = orts2
+	url = https://github.com/silic0nalph4/orts2
