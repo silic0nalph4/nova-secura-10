@@ -3,7 +3,7 @@ Nova Secura
 
 An OpenTibia 10.x server running under Docker on a Raspberry Pi.
 
-[Hardware & Operating System Setu](docs/raspberry_pi_setup.md)
+[Hardware & Operating System Setup](docs/raspberry_pi_setup.md)
 
 Repositories
 ============
