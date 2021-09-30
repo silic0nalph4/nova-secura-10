@@ -5,6 +5,7 @@ services:
   server:
     build:
       context: forgottenserver
+      dockerfile: Dockerfile.clean
     restart: always
     ports:
       - "7171:7171"
