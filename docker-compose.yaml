@@ -15,8 +15,8 @@ services:
     networks:
       - db-network
     volumes:
-      - ./orts2/data:/srv/data
-      - ./config.lua:/srv/config.lua
+      - ./orts2/data:/srv/data # Mount world data pack from local copy
+      - ./config/config.lua:/srv/config.lua # Mount TFS config file from local copy
 
   # MyAAC Account Website
   web:
@@ -30,8 +30,8 @@ services:
     depends_on:
       - db
     volumes:
-      - ./orts2/data:/srv/data
-      - ./config.lua:/srv/config.lua
+      - ./orts2/data:/srv/data # Mount world data pack from local copy
+      - ./config/config.lua:/srv/config.lua # Mount TFS config file from local copy
 
   # Maria DB
   db:
@@ -39,20 +39,16 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: aibit
-      MYSQL_USER: forgottenserver
-      MYSQL_PASSWORD: aibit
-      # Automatically creates a database
-      MYSQL_DATABASE: forgottenserver
+      MYSQL_USER: forgottenserver # Also needs to be set in config.lua
+      MYSQL_PASSWORD: aibit # Also needs to be set in config.lua
+      MYSQL_DATABASE: forgottenserver # Also needs to be set in config.lua
     volumes:
-      # Mount & persist the database storage locally rather than inside the container
-      - ./db:/var/lib/mysql
-      # Create database schema on startup
-      - ./forgottenserver/schema.sql:/docker-entrypoint-initdb.d/forgottenserver_schema.sql
-      - ./myaac/install/includes/schema.sql:/docker-entrypoint-initdb.d/myaac_schema.sql
+      - ./state/db:/var/lib/mysql # Mount & persist the database storage locally rather than inside the container
+      - ./forgottenserver/schema.sql:/docker-entrypoint-initdb.d/forgottenserver_schema.sql # Create TFS database schema on startup
     networks:
       - db-network
 
-  # Database Admin tool
+  # Optional database admin tool (basically PhpMyAdmin)
   db-adminer:
     image: adminer
     restart: always

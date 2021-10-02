@@ -17,5 +17,5 @@ $config['highscores_ids_hidden'] = array(2, 3, 4, 5, 6);
 // The following config changes can't be chosen via the installer and must be manually applied.
 $config['template'] = 'tibiacom'; // A familiar web design
 $config['character_samples'] = array(0 => 'Rook Sample'); // Characters start at level 1
-$config['character_towns'] = array(6); // Character spawn in Rookgaard (6) or Tutorial Island (30)
+$config['character_towns'] = array(30); // Character spawn in Rookgaard (6) or Tutorial Island (30)
 
