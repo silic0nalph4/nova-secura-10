@@ -36,7 +36,8 @@ Optional
 - `figlet` (for creating cool ascii art)
 - `ripgrep` (fast search)
 - `shellcheck` (Bash linter because you never know)
-- `unrar` (ORTS2 map file is distributed as a rar file)
+- `unzip` (ORTS2 map file is distributed as a zip file)
+- `unrar` (older versions of the ORTS2 map file were distributed as a rar file)
 
 SSH Banner
 ----------

@@ -7,5 +7,5 @@ set -x
 
 WORLD="./orts2/data/world"
 
-unrar e -r "${WORLD}"/*.rar "${WORLD}"
+unzip "${WORLD}/*.zip" -d "${WORLD}"
 

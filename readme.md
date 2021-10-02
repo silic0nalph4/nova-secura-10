@@ -31,7 +31,7 @@ Website Setup
 - If you've set your server's hostname to `nova-secura.local` and set up ZeroConf networking, you should get a response to
  `ping nova-secura.local` from your workstation. If you haven't set this up, use an IP address for the server that you can route to instead.
 - Navigate to http://nova-secura.local in a web browser - you should see the MyACC install page.
-- Follow the instal wizard. The path to your TFS install is `/srv` - once MyACC has loaded your config file everything else should
+- Follow the install wizard. The path to your TFS install is `/srv` - once MyACC has loaded your config file everything else should
 be straightforward.
 - You'll want to use client version `10.98` when prompted. I'm not sure how much of a difference it makes if the links on the website are wrong, but that's the latest protocol version that TFS supports.
 - When you reach the last page of the wizard, it's time to apply any custom MyACC config you want:
