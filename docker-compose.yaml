@@ -12,8 +12,6 @@ services:
       - "7172:7172"
     depends_on:
       - db
-    networks:
-      - db-network
     volumes:
       - ./orts2/data:/srv/data # Mount world data pack from local copy
       - ./config/config.lua:/srv/config.lua # Mount TFS config file from local copy
@@ -25,8 +23,6 @@ services:
     restart: unless-stopped
     ports:
       - 80:80
-    networks:
-      - db-network
     depends_on:
       - db
     volumes:
@@ -38,16 +34,13 @@ services:
     image: mariadb
     restart: unless-stopped
     environment:
-      #MYSQL_RANDOM_ROOT_PASSWORD: "yes"
-      MYSQL_ROOT_PASSWORD: aibit
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
       MYSQL_USER: forgottenserver # Also needs to be set in config.lua
       MYSQL_PASSWORD: aibit # Also needs to be set in config.lua
       MYSQL_DATABASE: forgottenserver # Also needs to be set in config.lua
     volumes:
       - ./state/db:/var/lib/mysql # Mount & persist the database storage locally rather than inside the container
       - ./forgottenserver/schema.sql:/docker-entrypoint-initdb.d/forgottenserver_schema.sql # Create TFS database schema on startup
-    networks:
-      - db-network
 
   # Optional database admin tool (basically PhpMyAdmin)
   db-adminer:
@@ -55,8 +48,3 @@ services:
     restart: unless-stopped
     ports:
       - 8080:8080
-    networks:
-      - db-network
-
-networks:
-  db-network:
