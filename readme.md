@@ -90,7 +90,7 @@ Updating Config/Data
 --------------------
 
 The config file and datapack are mounted from local copies on the filesystem. This means that changes made to those copies are
-immediately reflected in the running Docker containers. `config.lua` changes will normally requir you to restart the server (see the
+immediately reflected in the running Docker containers. `config.lua` changes will normally require you to restart the server (see the
 pause & resume commands above), but datapack changes can often be made live - especially Lua files.
 
 To make it explicit:
