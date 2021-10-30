@@ -112,5 +112,13 @@ TODO document how to update to new versions of TFS, MyAAC, and ORTS2.
 Backups
 -------
 
-TODO set up scheduled SQL dumps, document how it works.
+This cluster is set up to automatically export the contents of the database to a `.sql` file on a daily schedule.
+This uses the [jan-di/database-backup](https://github.com/jan-di/docker-database-backup) tool.
+
+Backups are written to `./state/db-backups/`.
+
+It's worth noting that the backup service currently always overwrites the previous backup when it runs.
+The file name does not contain a timestamp, so you'll need to copy these backups to an external location
+and version them on a daily basis if you want to keep more than the most recent snapshot of your data.
+
 

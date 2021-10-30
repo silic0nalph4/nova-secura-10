@@ -41,6 +41,10 @@ services:
     volumes:
       - ./state/db:/var/lib/mysql # Mount & persist the database storage locally rather than inside the container
       - ./forgottenserver/schema.sql:/docker-entrypoint-initdb.d/forgottenserver_schema.sql # Create TFS database schema on startup
+    labels:
+      jan-di.database-backup.enable: "true" # Enable automatic database backups
+      jan-di.database-backup.username: "forgottenserver" # Username for backup service
+      jan-di.database-backup.password: "aibit" # Password for backup service
 
   # Optional database admin tool (basically PhpMyAdmin)
   db-adminer:
@@ -48,3 +52,15 @@ services:
     restart: unless-stopped
     ports:
       - 8080:8080
+
+  # Optional automatic database backups
+  db-backup:
+    image: ghcr.io/jan-di/database-backup
+    environment:
+      TZ: "Europe/London"
+      SCHEDULE: "@daily"
+    depends_on:
+      - db
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # Service needs to read list of running Docker containers
+      - ./state/db-backups:/dump # Mount backup directory locally
