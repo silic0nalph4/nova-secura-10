@@ -17,7 +17,7 @@ The following forks are used by this project via Git Submodules:
 Setup
 =====
 
-- `git clone git@github.com:silic0nalph4/nova-secura-10.git` to get a copy of this repo.
+- `git clone --recurse-submodules git@github.com:silic0nalph4/nova-secura-10.git` to get a copy of this repo.
 - `./setup_map.sh` to unzip the ORTS2 map file. This is distributed as a zip because maps can be big!
 - `cp config/config.lua.example config/config.lua` to create your config file.
 - Edit the new config file you created - see the `config.lua` section below as there are some changes you **must** make before
