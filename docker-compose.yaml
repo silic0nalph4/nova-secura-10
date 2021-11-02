@@ -45,6 +45,7 @@ services:
       jan-di.database-backup.enable: "true" # Enable automatic database backups
       jan-di.database-backup.username: "forgottenserver" # Username for backup service
       jan-di.database-backup.password: "aibit" # Password for backup service
+      jan-di.database-backup.dump_timestamp: "true" # Use timestamp in backup names
 
   # Optional database admin tool (basically PhpMyAdmin)
   db-adminer:
@@ -55,7 +56,8 @@ services:
 
   # Optional automatic database backups
   db-backup:
-    image: ghcr.io/jan-di/database-backup
+    image: ghcr.io/jan-di/database-backup:main
+    restart: unless-stopped
     environment:
       TZ: "Europe/London"
       SCHEDULE: "@daily"
