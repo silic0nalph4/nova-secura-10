@@ -25,29 +25,6 @@ starting the server!
 - `docker-compose up` to start the cluster.
 - Once the server has started, it's time to configure MyACC.
 
-Website Setup
--------------
-
-- If you've set your server's hostname to `nova-secura.local` and set up ZeroConf networking, you should get a response to
- `ping nova-secura.local` from your workstation. If you haven't set this up, use an IP address for the server that you can route to instead.
-- Navigate to http://nova-secura.local in a web browser - you should see the MyACC install page. It won't let you run 
-the install wizard until you've told it what IP address you're connecting from.
-- Run `docker exec -it nova-secura-10_web_1 /bin/bash`
-- Run `vi install/ip.txt` and add the IP address of the computer you're connecting from to the end of the file.
-- Refresh the page, follow the install wizard. The path to your TFS install is `/srv` - once MyACC has loaded your 
-config file everything else shouldbe straightforward.
-- You'll want to use client version `10.98` when prompted. I'm not sure how much of a difference it makes if the links 
-on the website are wrong, but that's the latest protocol version that TFS supports.
-- When you reach the last page of the wizard, it's time to apply any custom MyACC config you want:
-- Run `docker exec -it nova-secura-10_web_1 /bin/bash`
-- `vi config.local.php` and append your personal config changes. I've included my preferences in `config/config.local.php` in this repo.
-- You can now access the MyACC website to create characters etc.
-
-Client
-------
-
-You'll need an OTClient to connect to the server. I'm using https://github.com/edubart/otclient - you can download a binary from the "Actions" tab on GitHub. You'll also need appropriate `.spr` and `.dat` files for the game you're trying to play - but that's beyond the scope of this guide, sorry.
-
 My config.lua
 -------------
 
@@ -71,6 +48,28 @@ Some additional changes that I've made are:
 - `housePriceEachSQM = 1` (cheapest rent you'll ever find!)
 - `houseRentPeriod = "yearly"` (house rent only charged annually)
 
+Website Setup
+-------------
+
+- If you've set your server's hostname to `nova-secura.local` and set up ZeroConf networking, you should get a response to
+ `ping nova-secura.local` from your workstation. If you haven't set this up, use an IP address for the server that you can route to instead.
+- Navigate to http://nova-secura.local in a web browser - you should see the MyACC install page. It won't let you run 
+the install wizard until you've told it what IP address you're connecting from.
+- Run `docker exec -it nova-secura-10_web_1 /bin/bash`
+- Run `vi install/ip.txt` and add the IP address of the computer you're connecting from to the end of the file.
+- Refresh the page, follow the install wizard. The path to your TFS install is `/srv` - once MyACC has loaded your 
+config file everything else shouldbe straightforward.
+- You'll want to use client version `10.98` when prompted. I'm not sure how much of a difference it makes if the links 
+on the website are wrong, but that's the latest protocol version that TFS supports.
+- When you reach the last page of the wizard, it's time to apply any custom MyACC config you want:
+- Run `docker exec -it nova-secura-10_web_1 /bin/bash`
+- `vi config.local.php` and append your personal config changes. I've included my preferences in `config/config.local.php` in this repo.
+- You can now access the MyACC website to create characters etc.
+
+Client
+------
+
+You'll need an OTClient to connect to the server. I'm using https://github.com/edubart/otclient - you can download a binary from the "Actions" tab on GitHub. You'll also need appropriate `.spr` and `.dat` files for the game you're trying to play - but that's beyond the scope of this guide, sorry.
 
 Administration
 ==============
@@ -84,7 +83,6 @@ Starting & Stopping
     - Note: if you run this you will need to re-setup MyAAC when you start the containers again.
 - Start service: `docker-compose up -d`
 - Follow logs: `docker-compose logs -f`
-
 
 Updating Config/Data
 --------------------
@@ -104,10 +102,18 @@ Working with Submodules
 
 TODO document how to update the underlying submodules
 
-Updating Services
------------------
+Updating OpenTibia
+------------------
 
 TODO document how to update to new versions of TFS, MyAAC, and ORTS2.
+
+Updating Generic Services
+-------------------------
+
+Some of the container images this repo uses are pre-packaged - namely `adminer`, `mariadb`, and `database-backup`. New versions of these are published fairly often - you should use the following procedure to update the cluster. Do this during scheduled downtime rather than when you have active players :)
+
+- `docker-compose pull` to get new versions of container images.
+- `docker-compose up -d` to recreate any updated container images.
 
 Backups
 -------
