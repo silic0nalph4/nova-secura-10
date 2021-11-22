@@ -46,6 +46,8 @@ services:
       jan-di.database-backup.username: "forgottenserver" # Username for backup service
       jan-di.database-backup.password: "aibit" # Password for backup service
       jan-di.database-backup.dump_timestamp: "true" # Use timestamp in backup names
+      jan-di.database-backup.retention_policy: "simple" # Keep some backups
+      jan-di.database-backup.retention_max_count: "60" # Keep two months' worth of backups
 
   # Optional database admin tool (basically PhpMyAdmin)
   db-adminer:
@@ -56,11 +58,12 @@ services:
 
   # Optional automatic database backups
   db-backup:
-    image: ghcr.io/jan-di/database-backup:main
+    image: ghcr.io/jan-di/database-backup:0.3.0
     restart: unless-stopped
     environment:
       TZ: "Europe/London"
       SCHEDULE: "@daily"
+      RUN_AT_STARTUP: "true"
     depends_on:
       - db
     volumes:
